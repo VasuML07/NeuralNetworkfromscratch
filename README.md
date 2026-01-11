@@ -19,7 +19,7 @@ The core of this repository is the manual implementation of the learning cycle:
 
 Forward Propagation: Data flows through the network, transforming inputs into a prediction.
 
-Loss Calculation: We calculate "Binary Cross-Entropy" to mathematically quantify the difference between the model's prediction and the actual diagnosis.
+Loss Calculation: We calculate "Binary Cross-Entropy" to mathematically quantify the difference between the model's prediction  the actual diagnosis.
 
 Backpropagation: Using the Chain Rule of Calculus, we compute the gradient of the loss with respect to every single weight and bias in the network. This tells us exactly how much to adjust each parameter to reduce error.
 
