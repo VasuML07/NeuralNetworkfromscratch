@@ -72,84 +72,14 @@ ReLU(z)=max(0,z)
 
 σ(z)= 1/(1+e^(-x))
 
-	​
+loss = - (y * np.log(Y + 1e-8) + (1 - y) * np.log(1 - Y + 1e-8))
+​
 
 2️⃣ Loss Function — Binary Cross-Entropy
 
 This measures how wrong the prediction is:
 
-𝐿
-=
-−
-1
-𝑚
-∑
-𝑖
-=
-1
-𝑚
-[
-𝑦
-(
-𝑖
-)
-log
-⁡
-(
-𝑦
-^
-(
-𝑖
-)
-)
-+
-(
-1
-−
-𝑦
-(
-𝑖
-)
-)
-log
-⁡
-(
-1
-−
-𝑦
-^
-(
-𝑖
-)
-)
-]
-L=−
-m
-1
-	​
 
-i=1
-∑
-m
-	​
-
-[y
-(i)
-log(
-y
-^
-	​
-
-(i)
-)+(1−y
-(i)
-)log(1−
-y
-^
-	​
-
-(i)
-)]
 
 Lower loss = better predictions.
 
@@ -158,117 +88,13 @@ Lower loss = better predictions.
 Gradients are computed manually for every parameter.
 
 Output Layer Gradient
-𝑑
-𝑍
-[
-2
-]
-=
-𝐴
-[
-2
-]
-−
-𝑌
-dZ
-[2]
-=A
-[2]
-−Y
-Weight Updates
-𝑑
-𝑊
-[
-𝑙
-]
-=
-1
-𝑚
-𝑑
-𝑍
-[
-𝑙
-]
-𝐴
-[
-𝑙
-−
-1
-]
-𝑇
-dW
-[l]
-=
-m
-1
-	​
+​
+dZ2 = A2 - Y
 
-dZ
-[l]
-A
-[l−1]
-T
-Bias Updates
-𝑑
-𝑏
-[
-𝑙
-]
-=
-1
-𝑚
-∑
-𝑑
-𝑍
-[
-𝑙
-]
-db
-[l]
-=
-m
-1
-	​
+m = Y.shape[1]   # number of samples
+dW2 = (1 / m) * np.dot(dZ2, A1.T)
 
-∑dZ
-[l]
-
-ReLU derivative:
-
-𝑑
-𝑑
-𝑧
-ReLU
-(
-𝑧
-)
-=
-{
-1
-	
-𝑧
->
-0
-
-
-0
-	
-𝑧
-≤
-0
-dz
-d
-	​
-
-ReLU(z)={
-1
-0
-	​
-
-z>0
-z≤0
-	​
-
+db2 = (1 / m) * np.sum(dZ2, axis=1, keepdims=True)
 
 This is pure calculus + matrix multiplication.
 
@@ -276,29 +102,7 @@ This is pure calculus + matrix multiplication.
 
 Each parameter is updated as:
 
-𝜃
-:
-=
-𝜃
-−
-𝛼
-⋅
-∇
-𝜃
-θ:=θ−α⋅∇
-θ
-	​
-
-
-Where:
-
-𝛼
-α = learning rate
-
-∇
-𝜃
-∇
-θ
+para_new = para_old-(learning-rate)*(gradient)
 	​
 
  = computed gradient
