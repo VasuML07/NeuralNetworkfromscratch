@@ -66,67 +66,12 @@ Learns non-linear feature interactions using ReLU
 Output Layer:
 Outputs probability of malignancy using Sigmoid
 
-🧮 Mathematical Foundations (The Real Core)
-1️⃣ Forward Propagation
-Linear Transformation
-𝑍
-[
-𝑙
-]
-=
-𝑊
-[
-𝑙
-]
-𝐴
-[
-𝑙
-−
-1
-]
-+
-𝑏
-[
-𝑙
-]
-Z
-[l]
-=W
-[l]
-A
-[l−1]
-+b
-[l]
-ReLU Activation (Hidden Layer)
-ReLU
-(
-𝑧
-)
-=
-max
-⁡
-(
-0
-,
-𝑧
-)
+
+
 ReLU(z)=max(0,z)
-Sigmoid Activation (Output Layer)
-𝜎
-(
-𝑧
-)
-=
-1
-1
-+
-𝑒
-−
-𝑧
-σ(z)=
-1+e
-−z
-1
+
+σ(z)= 1/(1+e^(-x))
+
 	​
 
 2️⃣ Loss Function — Binary Cross-Entropy
