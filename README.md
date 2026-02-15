@@ -1,121 +1,105 @@
-🧠 Breast Cancer Detection — Neural Network From Scratch (NumPy Only)
-🚀 Project Overview
+# 🧠 Breast Cancer Detection  
+### Neural Network From Scratch (NumPy Only)
 
-This project implements a fully connected neural network (Multi-Layer Perceptron) from first principles, using only Python and NumPy.
-No TensorFlow. No PyTorch. No shortcuts.
+A fully connected neural network (Multi-Layer Perceptron) implemented entirely from first principles using Python and NumPy.
 
-The model classifies tumors as Malignant or Benign using the Wisconsin Breast Cancer Dataset, proving that deep learning is just math + logic + iteration, not magic.
+No TensorFlow.  
+No PyTorch.  
+No abstraction layers.
 
-The goal is simple but ambitious:
+This project proves that deep learning is linear algebra + calculus + optimization — not magic.
 
-Demystify neural networks by building every component manually.
+---
 
-🧩 Why This Project Exists (Read This If You’re Serious About ML)
+## 🚀 Project Overview
 
-Most ML projects hide the learning process behind high-level APIs.
-This one does the opposite.
+The model classifies tumors as:
 
-By implementing everything from scratch, this repository demonstrates:
+- 0 → Malignant  
+- 1 → Benign  
 
-How neural networks actually compute
+Using the Wisconsin Breast Cancer Dataset.
 
-How gradients flow via calculus (Chain Rule)
+The goal is to demystify neural networks by manually implementing:
 
-How optimization updates weights using linear algebra
+- Forward propagation  
+- Backpropagation  
+- Gradient descent  
+- Binary cross-entropy loss  
 
-Why neural networks are not black boxes if you understand the math
+---
 
-If you can explain this project, you can explain deep learning fundamentals confidently.
+## 📊 Dataset
 
-📊 Dataset
+**Wisconsin Breast Cancer Dataset**
 
-Wisconsin Breast Cancer Dataset
+- Samples: 569  
+- Features: 30 real-valued tumor characteristics  
+  (radius, texture, smoothness, concavity, symmetry, etc.)  
 
-Samples: 569
+All features are standardized for stable gradient descent.
 
-Features: 30 real-valued tumor characteristics
-(radius, texture, smoothness, concavity, symmetry, etc.)
+---
 
-Labels:
+## 🏗️ Neural Network Architecture
 
-0 → Malignant
-
-1 → Benign
-
-All features are standardized to ensure stable gradient descent.
-
-🏗️ Neural Network Architecture
 Input Layer (30 features)
-        ↓
+↓
 Hidden Layer (16 neurons)
 [Linear → ReLU]
-        ↓
+↓
 Output Layer (1 neuron)
 [Linear → Sigmoid]
-        ↓
+↓
 Binary Prediction (0 or 1)
 
-Layer Breakdown
 
-Input Layer:
-Receives normalized feature vectors
+---
 
-Hidden Layer:
-Learns non-linear feature interactions using ReLU
+## ⚙️ Mathematical Foundations
 
-Output Layer:
-Outputs probability of malignancy using Sigmoid
+### 1️⃣ Activation Functions
 
+ReLU:
+ReLU(z) = max(0, z)
 
 
-ReLU(z)=max(0,z)
-
-σ(z)= 1/(1+e^(-x))
-
-loss = - (y * np.log(Y + 1e-8) + (1 - y) * np.log(1 - Y + 1e-8))
-​
-
-2️⃣ Loss Function — Binary Cross-Entropy
-
-This measures how wrong the prediction is:
+Sigmoid:
+σ(z) = 1 / (1 + e^(-z))
 
 
+---
 
-Lower loss = better predictions.
+### 2️⃣ Loss Function — Binary Cross-Entropy
 
-3️⃣ Backpropagation (Chain Rule in Action)
+Loss = - ( y log(Y) + (1 - y) log(1 - Y) )
 
-Gradients are computed manually for every parameter.
 
-Output Layer Gradient
-​
+Lower loss indicates better predictions.
+
+---
+
+### 3️⃣ Backpropagation (Chain Rule)
+
+Output layer gradient:
+
+```python
 dZ2 = A2 - Y
-
-m = Y.shape[1]   # number of samples
+m = Y.shape[1]
 dW2 = (1 / m) * np.dot(dZ2, A1.T)
-
 db2 = (1 / m) * np.sum(dZ2, axis=1, keepdims=True)
-
-This is pure calculus + matrix multiplication.
+This is pure calculus expressed in matrix form.
 
 4️⃣ Optimization — Gradient Descent
-
-Each parameter is updated as:
-
-para_new = para_old-(learning-rate)*(gradient)
-	​
-
- = computed gradient
-
-Repeat this for 1000 epochs, and the network learns.
+parameter_new = parameter_old - learning_rate × gradient
+Repeated over ~1000 epochs until convergence.
 
 🔁 Training Workflow
-
 Load dataset
 
 Standardize features
 
-Split into train/test sets
+Train-test split
 
 Forward propagation
 
@@ -125,14 +109,11 @@ Backpropagation
 
 Update weights
 
-Repeat until convergence
+Repeat
 
-This loop is the heartbeat of deep learning.
+This loop is the core engine of deep learning.
 
 📈 Evaluation Metrics
-
-The model is evaluated using:
-
 Accuracy
 
 Precision
@@ -143,49 +124,40 @@ F1-Score
 
 Sample Results
 Training Accuracy: ~98%
-Testing Accuracy:  ~96%
 
+Testing Accuracy: ~96%
 
-High accuracy without overfitting — achieved without any DL framework.
+High generalization achieved without any deep learning framework.
 
 🧪 Example Prediction
-Input: [feature vector]
+Input: Feature vector
 Actual Label: 1 (Benign)
 Predicted Label: 1 (Benign)
 
+The model outputs probability and applies a 0.5 classification threshold.
 
-The model outputs a probability and applies a 0.5 threshold for classification.
+🛠 Tech Stack
+💻 Core Language
 
-🛠️ Tech Stack
+📊 Numerical Computation
 
-Python 🐍
+📈 Dataset & Metrics
 
-NumPy (matrix math)
+🎯 What This Project Demonstrates
+Manual implementation of neural networks
 
-Scikit-learn (data + metrics only)
-
-No deep learning libraries used.
-
-🎯 What This Project Proves
-
-This repository demonstrates strong understanding of:
-
-Neural network internals
+Deep understanding of backpropagation
 
 Linear algebra for ML
 
 Gradient-based optimization
 
-Loss functions and activations
+End-to-end ML pipeline development
 
-End-to-end ML pipelines
+This project shows not just usage of neural networks — but comprehension of their internals.
 
-In short:
-You don’t just use neural networks — you understand them.
-
-📌 Future Improvements
-
-Add multi-layer support
+🔮 Future Improvements
+Add deeper multi-layer support
 
 Implement Adam optimizer manually
 
