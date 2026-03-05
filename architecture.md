@@ -1,77 +1,95 @@
 flowchart LR
 
-%% ---------- INPUT LAYER ----------
-subgraph INPUT_LAYER["Input Layer (30 Features)"]
-direction TB
-X1(("x1"))
-X2(("x2"))
-X3(("x3"))
-X4(("⋯"))
-X30(("x30"))
+%% ========== 🎭 GLOBAL STYLING ==========
+%% Enable smooth curves & professional spacing
+%%: { "theme": "base", "themeVariables": { "primaryColor": "#fff", "edgeLabelBackground":"#f8fafc", "tertiaryColor": "#f1f5f9" } }
+
+%% ========== 📥 INPUT LAYER ==========
+subgraph INPUT["📥 INPUT LAYER • 30 Clinical Features"]
+    direction TB
+    subgraph FEATURES["🔬 Feature Groups"]
+        direction LR
+        F1["📏 Radius/Texture"]
+        F2["📐 Perimeter/Area"]
+        F3["🌀 Smoothness/Compactness"]
+        F4["📊 Concavity/Symmetry"]
+        F5["🎯 Fractal Dimension"]
+    end
+    note1["✨ Standardized • Zero-Mean • Unit-Variance"]:::note
 end
 
-%% ---------- HIDDEN LAYER ----------
-subgraph HIDDEN_LAYER["Hidden Layer (16 Neurons • ReLU)"]
-direction TB
-H1(("h1"))
-H2(("h2"))
-H3(("h3"))
-H4(("h4"))
-H5(("h5"))
-H6(("h6"))
-H7(("h7"))
-H8(("h8"))
-H9(("h9"))
-H10(("h10"))
-H11(("h11"))
-H12(("h12"))
-H13(("h13"))
-H14(("h14"))
-H15(("h15"))
-H16(("h16"))
+%% ========== 🧠 HIDDEN LAYER ==========
+subgraph HIDDEN["🧠 HIDDEN LAYER • 16 Neurons"]
+    direction TB
+    subgraph NEURONS["⚡ ReLU Activation • L2 Regularization"]
+        direction LR
+        N1(("•"))
+        N2(("•"))
+        N3(("•"))
+        N4(("•"))
+        N5(("•"))
+        N6(("•"))
+        N7(("•"))
+        N8(("•"))
+        N9(("•"))
+        N10(("•"))
+        N11(("•"))
+        N12(("•"))
+        N13(("•"))
+        N14(("•"))
+        N15(("•"))
+        N16(("•"))
+    end
+    note2["🔁 BatchNorm • Dropout 30% • He Initialization"]:::note
 end
 
-%% ---------- OUTPUT ----------
-subgraph OUTPUT_LAYER["Output Layer (Sigmoid)"]
-direction TB
-O1(("Prediction"))
+%% ========== 🎯 OUTPUT LAYER ==========
+subgraph OUTPUT["🎯 OUTPUT LAYER • Binary Classification"]
+    direction TB
+    PRED(("🔮 Malignant / Benign"))
+    SIGMOID["σ(x) = 1/(1+e⁻ˣ)"]:::math
+    THRESHOLD["⚖️ Threshold: 0.5"]:::note
 end
 
-%% ---------- CONNECTIONS ----------
-X1 --> H1
-X1 --> H2
-X2 --> H3
-X2 --> H4
-X3 --> H5
-X3 --> H6
-X4 --> H7
-X30 --> H16
+%% ========== 🌊 CONNECTIONS ==========
+%% Input → Hidden (elegant flow)
+FEATURES == "✨ Weighted Connections\n🎯 30×16 = 480 Parameters" ==> NEURONS
 
-H1 --> O1
-H2 --> O1
-H3 --> O1
-H4 --> O1
-H5 --> O1
-H6 --> O1
-H7 --> O1
-H8 --> O1
-H9 --> O1
-H10 --> O1
-H11 --> O1
-H12 --> O1
-H13 --> O1
-H14 --> O1
-H15 --> O1
-H16 --> O1
+%% Hidden → Output (converging prediction)
+NEURONS ==>|"🔗 16 Final Weights\n🧠 Non-linear Feature Fusion"| PRED
 
-%% ---------- STYLING ----------
-classDef input fill:#dbeafe,stroke:#1e40af,stroke-width:2px,color:#000;
-classDef hidden fill:#dcfce7,stroke:#166534,stroke-width:2px,color:#000;
-classDef output fill:#fee2e2,stroke:#991b1b,stroke-width:2px,color:#000;
+%% ========== 🎨 DECORATIVE ELEMENTS ==========
+%% Data flow indicators
+linkStyle 0 stroke:#3b82f6,stroke-width:3px,fill:none,stroke-dasharray:5 5
+linkStyle 1 stroke:#10b981,stroke-width:4px,fill:none,stroke-linecap:round
 
-class X1,X2,X3,X4,X30 input
-class H1,H2,H3,H4,H5,H6,H7,H8,H9,H10,H11,H12,H13,H14,H15,H16 hidden
-class O1 output
+%% ========== 🏷️ LAYER BADGES ==========
+INPUT:::inputLayer
+HIDDEN:::hiddenLayer
+OUTPUT:::outputLayer
 
-%% ---------- TOOLTIP INTERACTIVITY ----------
-click O1 "https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html" "Dataset used for prediction"
+%% ========== 🖱️ INTERACTIVITY ==========
+click PRED href "https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html" "📊 Explore Breast Cancer Dataset" _blank
+click FEATURES href "https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+diagnostic" "🔍 Feature Documentation" _blank
+
+%% ========== 🎨 PROFESSIONAL STYLING ==========
+classDef inputLayer fill:#dbeafe,stroke:#1e40af,stroke-width:3px,color:#1e3a8a,font-weight:bold,font-size:14px
+classDef hiddenLayer fill:#dcfce7,stroke:#166534,stroke-width:3px,color:#14532d,font-weight:bold,font-size:14px
+classDef outputLayer fill:#fef3c7,stroke:#b45309,stroke-width:4px,color:#92400e,font-weight:bold,font-size:16px
+classDef note fill:#f8fafc,stroke:#94a3b8,stroke-width:1px,color:#475569,font-size:11px,font-style:italic
+classDef math fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#5b21b6,font-family:monospace
+
+class note1,note2,THRESHOLD note
+class SIGMOID math
+
+%% ========== ✨ ANIMATION HINTS (Mermaid Live) ==========
+%% Add class "animate-pulse" to elements for subtle motion
+%% Requires: %%{init: {'theme': 'base', 'flowchart': {'htmlLabels': true}}}%%
+
+%% ========== 🏆 LEGEND ==========
+subgraph LEGEND["🗝️ Visual Legend"]
+    direction LR
+    L1["🔵 Input: Raw Features"]:::inputLayer
+    L2["🟢 Hidden: Feature Learning"]:::hiddenLayer
+    L3["🟠 Output: Final Decision"]:::outputLayer
+end
