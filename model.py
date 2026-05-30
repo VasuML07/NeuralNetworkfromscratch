@@ -7,16 +7,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import f1_score, roc_curve
 
-# =========================
 # ACTIVATIONS
-# =========================
+
 def sigmoid(Z): return 1/(1+np.exp(-Z))
 def relu(Z): return np.maximum(0,Z)
 def relu_deriv(Z): return (Z>0).astype(float)
 
-# =========================
+
 # INIT
-# =========================
+
 def initialize(layers):
     params={}
     for l in range(1,len(layers)):
@@ -24,9 +23,8 @@ def initialize(layers):
         params[f"B{l}"]=np.zeros((layers[l],1))
     return params
 
-# =========================
 # FORWARD
-# =========================
+
 def forward(X,params):
     cache={}
     A=X
@@ -41,9 +39,8 @@ def forward(X,params):
     cache[f"A{L}"]=AL
     return AL,cache
 
-# =========================
 # LOSS
-# =========================
+
 def compute_loss(AL,Y):
     eps=1e-15
     return -np.mean(Y*np.log(AL+eps)+(1-Y)*np.log(1-AL+eps))
@@ -65,9 +62,9 @@ def backward(X,Y,params,cache):
             dZ=dA*relu_deriv(cache[f"Z{l-1}"])
     return grads
 
-# =========================
+
 # ADAM
-# =========================
+
 def update(params,grads,opt,lr):
     beta,beta2,eps=0.9,0.999,1e-8
     for k in params:
@@ -81,9 +78,8 @@ def update(params,grads,opt,lr):
         opt["s_"+k]=s
     return params,opt
 
-# =========================
 # TRAIN
-# =========================
+
 def train(X,Y,X_val,Y_val,layers,epochs=30,lr=0.001):
     params=initialize(layers)
     opt={}
