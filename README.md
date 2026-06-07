@@ -1,52 +1,65 @@
-# 💳 Neural Network From Scratch (Fraud Detection)
+# 🧠 Neural Network From Scratch
 
-Minimal, from-scratch neural network built using **NumPy only**, applied to a real-world problem: **credit card fraud detection**.
+Minimal, from-scratch neural network built using **NumPy only**, designed to demonstrate the core principles of deep learning without relying on external machine learning frameworks.
 
 ---
 
 ## 🚀 Problem
 
-Fraud detection is hard because:
+Modern deep learning frameworks make it easy to train models, but they often hide the underlying mechanics.
 
-- Data is **extremely imbalanced**
-- Accuracy is misleading  
-- Default thresholds fail  
-- Frameworks hide core logic  
+Key concepts that are usually abstracted away:
 
-👉 Example: only ~492 frauds in 284,807 transactions (~0.17%) :contentReference[oaicite:0]{index=0}
+* Forward propagation
+* Backpropagation
+* Gradient computation
+* Weight updates
+* Optimization algorithms
+* Model training workflow
+
+Understanding these fundamentals is essential for building a strong foundation in machine learning.
 
 ---
 
 ## 💡 Solution
 
-- Neural network built **from scratch**
-- Manual forward + backprop
-- **Adam optimizer**
-- **ROC-based threshold tuning**
-- Evaluated using **F1 score**
+A fully connected neural network implemented entirely from scratch using NumPy.
+
+The project includes:
+
+* Manual forward propagation
+* Manual backpropagation
+* Gradient-based optimization
+* Configurable network architectures
+* Training and evaluation pipeline
+
+This provides a clear view of how neural networks learn internally.
 
 ---
 
 ## ⚙️ Features
 
-- Pure NumPy implementation  
-- Experiment runner (multi configs)  
-- Train / validation tracking  
-- Best model selection  
-- Model saving (`.pkl`)  
+* Pure NumPy implementation
+* Custom dense layers
+* Activation functions
+* Forward and backward propagation
+* Adam optimizer
+* Training and validation tracking
+* Experiment runner
+* Best model selection
+* Model saving (`.pkl`)
 
 ---
 
-## 📂 Dataset
+## 📂 Project Structure
 
-Credit Card Fraud Dataset (Kaggle)  
-👉 https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud  
-
-- 284K+ transactions  
-- Highly imbalanced  
-- Anonymized features (V1–V28)  
-
-> Place `creditcard.csv` in project root before running
+* Neural network implementation
+* Layer definitions
+* Activation functions
+* Optimizers
+* Training utilities
+* Experiment management
+* Model persistence
 
 ---
 
@@ -56,3 +69,31 @@ Credit Card Fraud Dataset (Kaggle)
 git clone https://github.com/VasuML07/NeuralNetworkfromscratch
 cd NeuralNetworkfromscratch
 python main.py
+```
+
+---
+
+## 🛠 Tech Stack
+
+* Python
+* NumPy
+* Pickle
+
+---
+
+## 📈 Learning Outcomes
+
+This project demonstrates:
+
+* Neural network fundamentals
+* Matrix-based computation
+* Backpropagation mechanics
+* Gradient descent optimization
+* Model training workflows
+* Experiment-driven development
+
+---
+
+## 🎯 Goal
+
+The objective of this project is to understand and implement the building blocks of neural networks from first principles, gaining insight into the mathematics and engineering behind modern deep learning systems.
